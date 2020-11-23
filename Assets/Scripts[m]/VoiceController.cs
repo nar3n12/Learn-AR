@@ -74,6 +74,15 @@ public class VoiceController : MonoBehaviour
         {
             animation.Play("Bow");
         }
+        else if (result == "please clap" || result == "clap")
+        {
+            animation.Play("clap");
+        }
+        else if (result == "bye bye")
+        {
+            animation.Play("Bow");
+            Application.Quit();
+        }
     }
     
     void OnPartialSpeechResult(string result)
