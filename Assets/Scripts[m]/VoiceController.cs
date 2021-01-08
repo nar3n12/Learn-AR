@@ -15,10 +15,9 @@ public class VoiceController : MonoBehaviour
     private Animator animation;
     private void Start()
     {
-        Setup(LANG_CODE);
-        //_rin = this.gameObject;
-        //Debug.Log("gameobject: "+ rin.name);
-        animation = rin.GetComponent<Animator>();
+        Setup(LANG_CODE);   //sets speech to text language as en-US 
+        
+        animation = rin.GetComponent<Animator>();    //get animator component from gameobject (rin)
         Debug.Log("voice controller ");
 #if UNITY_ANDROID
         SpeechToText.instance.onPartialResultsCallback = OnPartialSpeechResult;
@@ -56,8 +55,8 @@ public class VoiceController : MonoBehaviour
 
     void OnFinalSpeechResult(string result)
     {
-        Debug.Log("done: "+result);
-        uiText.text = result;
+        uiText.text = result;            //populate recorded words as string to uitext ( the textbox below the character)
+        
         if (result == "please walk" || result == "walk")
         {
             animation.Play("Walk");
@@ -82,12 +81,12 @@ public class VoiceController : MonoBehaviour
         {
             animation.Play("Bow");
             Application.Quit();
-        }
+        }else animation.Play("confused");
     }
     
     void OnPartialSpeechResult(string result)
     {
-        uiText.text = result;
+        uiText.text = result;     //populate recorded words as string to uitext ( the textbox below the character)
     }
 
     #endregion
